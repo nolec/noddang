@@ -5,12 +5,15 @@ import {
   Redirect,
   Switch
 } from "react-router-dom";
+import HomePage from "./HomePage/HomePage";
+import NavBar from "./NavBar/NavBar";
 
 export default () => {
   return (
     <Router>
+      <NavBar />
       <Switch>
-        <Route path="/" />
+        <Route path="/" exact component={HomePage} />
         <Redirect from="/*" to="/" />
       </Switch>
     </Router>
