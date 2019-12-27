@@ -8,6 +8,9 @@ const globalStyles = createGlobalStyle`
     color: #211922;
     font-size: 12px;
  }
+ body {
+    padding-left : 280px;
+ }
  * {
     box-sizing: border-box;
     color: #8e8e8e;

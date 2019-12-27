@@ -1,0 +1,3 @@
+export const MOVIE_NOWPLAYING = "MOVIE_NOWPLAYING";
+export const DETAIL_MOVIE = "DETAIL_MOVIE";
+export const MOVIE_FAIL = "MOVIE_FAIL";
