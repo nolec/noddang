@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import Slide from "./Slide";
+import { useSelector } from "react-redux";
 
 const Content = styled.div`
   display: flex;
@@ -9,13 +11,16 @@ const Content = styled.div`
   z-index: 1;
 `;
 const Cover = styled.div`
-  min-width: 30%;
-  height: 100%;
-  background-image: url(${props => props.bgImage});
+    max-width: 400px;
+height: fit-content;
+  /* background-image: url(${props => props.bgImage});
   background-position: center center;
-  background-size: cover;
+  background-size: cover; */
   border-radius: 4px;
   background-color: black;
+  img{
+    width: 100%;
+  }
 `;
 const Data = styled.div`
   margin-left: 20px;
@@ -38,33 +43,36 @@ const Overview = styled.p`
   width: 50%;
 `;
 const MovieDetail = ({ children }) => {
-  console.log(children);
   return (
-    <Content>
-      <Cover
-        bgImage={`https://image.tmdb.org/t/p/original${children.poster_path}`}
-      />
-      <Data>
-        <Title>
-          {children.original_title
-            ? children.original_title
-            : children.original_name}
-        </Title>
-        <ItemContainer>
-          <Item></Item>
-          <Item>{children.runtime}</Item>
-          <Divider>·</Divider>
-          <Item>
-            {children.genres &&
-              children.genres.map((genre, index) =>
-                index === children.genres.length - 1
-                  ? genre.name
-                  : `${genre.name}/`
-              )}
-          </Item>
-        </ItemContainer>
-      </Data>
-    </Content>
+    <>
+      <Content>
+        <Cover>
+          <img
+            src={`https://image.tmdb.org/t/p/original${children.poster_path}`}
+          />
+        </Cover>
+        <Data>
+          <Title>
+            {children.original_title
+              ? children.original_title
+              : children.original_name}
+          </Title>
+          <ItemContainer>
+            <Item></Item>
+            <Item>{children.runtime}분</Item>
+            <Divider>·</Divider>
+            <Item>
+              {children.genres &&
+                children.genres.map((genre, index) =>
+                  index === children.genres.length - 1
+                    ? genre.name
+                    : `${genre.name}/`
+                )}
+            </Item>
+          </ItemContainer>
+        </Data>
+      </Content>
+    </>
   );
 };
 

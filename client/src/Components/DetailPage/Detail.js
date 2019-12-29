@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { detail, nowPlaying } from "../../actions/movie";
 import MovieDetail from "./MovieDetail";
-import Slide from "./Slide";
+import Carousel from "./Carousel";
 
 const Main = styled.main`
   max-height: 100vh;
@@ -33,20 +33,20 @@ const Bimage = styled.div`
 `;
 const SlideBox = styled.div`
   position: relative;
+  display: flex;
 `;
 const Detail = ({ match }) => {
   const dispatch = useDispatch();
   const movie = useSelector(state => state.movie.movie);
   const movies = useSelector(state => state.movie.movies);
 
-  console.log(`https://image.tmdb.org/t/p/original${movie.backdrop_path}`);
-
   useEffect(() => {
-    dispatch(detail(match));
     dispatch(nowPlaying());
+    dispatch(detail(match));
   }, []);
   return (
     <Main>
+      {console.log(movies, "detail-children")}
       <Container>
         <Wrapper>
           <ContentBox>
@@ -54,7 +54,11 @@ const Detail = ({ match }) => {
               back={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             />
             <SlideBox>
-              <Slide children={movies} />
+              <Carousel children={movies}>
+                {movies.map(movie => (
+                  <Carousel.Item movie={movie} key={movie.id}></Carousel.Item>
+                ))}
+              </Carousel>
             </SlideBox>
             <MovieDetail children={movie} />
           </ContentBox>
