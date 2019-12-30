@@ -8,7 +8,7 @@ const Item = styled.div`
   margin: 0 2px;
   position: relative;
   :hover ~ div {
-    transform: translateX(-25%);
+    transform: translateX(25%);
   }
   :hover {
     transform: scale(1.5) !important;
