@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect, ReactDOM } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import CarouselContext from "./context";
-import useSliding from "./useSliding";
 import SlideButton from "./SlideButton";
 
 const Carousel = styled.div`
   overflow: hidden;
-  padding: 55px;
 `;
 const CarouselWrapper = styled.div`
   display: flex;
+  padding: 0 55px;
   transition: transform 300ms ease 100ms;
   z-index: 3;
   width: 100%;
@@ -24,7 +23,6 @@ export default ({ children }) => {
   const elementWidth = width;
   //Wrapper--------------------------------------
   const PADDINGS = 110;
-
   const containerRef = useRef(null);
   const countElements = React.Children.count(children);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -42,6 +40,7 @@ export default ({ children }) => {
     setDistance(distance - containerWidth);
     console.log(
       containerRef.current.clientWidth,
+      elementWidth,
       containerWidth,
       distance,
       viewed,
@@ -50,6 +49,7 @@ export default ({ children }) => {
     );
   };
   //slideProps--------------------------------------
+
   const slideProps = {
     style: { transform: `translate3d(${distance}px, 0, 0)` }
   };
@@ -70,8 +70,9 @@ export default ({ children }) => {
     }
   }, [containerRef.current, handleNext, handlePrev]);
 
-  useEffect(() => {}, [elementRef.current]);
   const CarouselValue = { currentCarousel: 1, elementRef };
+
+  console.log("-----------", containerRef);
   return (
     <CarouselContext.Provider value={CarouselValue}>
       <Carousel>
